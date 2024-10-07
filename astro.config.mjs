@@ -39,6 +39,13 @@ export default defineConfig({
             },
           ],
         },
+        {
+          label: "Tutorials",
+          items: [
+            { label: "GitHub OAuth", slug: "tutorials/github-oauth" },
+            { label: "Google OAuth", slug: "tutorials/google-oauth" },
+          ],
+        },
       ],
     }),
   ],
