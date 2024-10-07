@@ -61,6 +61,13 @@ export default defineConfig({
             },
           ],
         },
+        {
+          label: "Rate limiting",
+          items: [
+            { label: "Token bucket", slug: "rate-limit/token-bucket" },
+            { label: "Throttling", slug: "rate-limit/throttling" },
+          ],
+        },
       ],
     }),
   ],
