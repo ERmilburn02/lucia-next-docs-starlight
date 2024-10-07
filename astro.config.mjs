@@ -4,11 +4,13 @@ import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://ermilburn02.github.io",
+  base: "lucia-next-docs-starlight",
   integrations: [
     starlight({
       title: "Lucia Next",
       social: {
-        // github: '',
+        github: "https://github.com/ERmilburn02/lucia-next-docs-starlight",
       },
       sidebar: [
         {
