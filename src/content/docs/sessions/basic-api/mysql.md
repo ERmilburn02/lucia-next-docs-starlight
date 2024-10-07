@@ -1,8 +1,5 @@
 ---
 title: "Sessions with MySQL"
-banner:
-  content: |
-    Site under construction
 ---
 
 # Sessions with MySQL

@@ -1,9 +1,6 @@
 ---
 title: "Migrate from Lucia v3"
 tableOfContents: false
-banner:
-  content: |
-    Site under construction
 ---
 
 Because Lucia v3 is lightweight and relatively low-level, migrating your project shouldn't take long. Moreover, most of your knowledge will still be very useful. No database migrations are necessary.

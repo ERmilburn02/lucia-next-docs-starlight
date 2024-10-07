@@ -1,8 +1,5 @@
 ---
 title: "Token bucket"
-banner:
-  content: |
-    Site under construction
 ---
 
 Each user has their own bucket of tokens that gets refilled at a set interval. A token is removed on every request until none is left and the request is rejected. While a bit more complex than the fixed-window algorithm, it allows you to handle initial bursts and process requests more smoothly overall.

@@ -1,9 +1,6 @@
 ---
 title: Sessions
 tableOfContents: false
-banner:
-  content: |
-    Site under construction
 ---
 
 Sessions are a way to persist state in the server. It is especially useful for managing the authentication state, such as the client's identity. We can assign each session with a unique ID and store it on the server to use it as a token. The client can then associate subsequent requests with a session, and by extension the user, by sending the its ID.

@@ -1,8 +1,5 @@
 ---
 title: "Sessions with Drizzle ORM"
-banner:
-  content: |
-    Site under construction
 ---
 
 Users will use a session token linked to a session instead of the ID directly. The session ID will be the SHA-256 hash of the token. SHA-256 is a one-way hash function. This ensures that even if the database contents were leaked, the attacker won't be able retrieve valid tokens.

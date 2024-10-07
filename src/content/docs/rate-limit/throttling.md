@@ -1,8 +1,5 @@
 ---
 title: "Throttling"
-banner:
-  content: |
-    Site under construction
 ---
 
 After each failed attempt, the user has to wait longer before their next attempt.
