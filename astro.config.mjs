@@ -12,21 +12,10 @@ export default defineConfig({
       logo: {
         src: "/src/assets/lucia-logo-square-transparent.webp",
       },
-      social: {
-        github: "https://github.com/ERmilburn02/lucia-next-docs-starlight",
-      },
+      // social: {
+      // },
+      favicon: "/favicon.ico",
       sidebar: [
-        //   {
-        //     label: "Guides",
-        //     items: [
-        //       // Each item here is one entry in the navigation menu.
-        //       { label: "Example Guide", slug: "guides/example" },
-        //     ],
-        //   },
-        //   {
-        //     label: "Reference",
-        //     autogenerate: { directory: "reference" },
-        //   },
         {
           label: "Sessions",
           items: [
@@ -68,7 +57,31 @@ export default defineConfig({
             { label: "Throttling", slug: "rate-limit/throttling" },
           ],
         },
+        {
+          label: "Community",
+          items: [
+            { label: "GitHub", link: "https://github.com/lucia-auth/lucia" },
+            { label: "Discord", link: "https://discord.gg/PwrK3kpVR3" },
+            { label: "Twitter", link: "https://x.com/lucia_auth" },
+            {
+              label: "Donate",
+              link: "https://github.com/sponsors/pilcrowOnPaper",
+            },
+          ],
+        },
+        {
+          label: "Related projects",
+          items: [
+            {
+              label: "The Copenhagen Book",
+              link: "https://thecopenhagenbook.com",
+            },
+            { label: "Oslo", link: "https://oslojs.dev" },
+            { label: "Arctic", link: "https://arcticjs.dev" },
+          ],
+        },
       ],
+      credits: true, // adds the "Built with Starlight" link to the footer
     }),
   ],
 });
