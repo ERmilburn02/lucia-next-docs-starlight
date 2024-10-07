@@ -46,6 +46,21 @@ export default defineConfig({
             { label: "Google OAuth", slug: "tutorials/google-oauth" },
           ],
         },
+        {
+          label: "Examples",
+          items: [
+            { label: "GitHub OAuth", slug: "examples/github-oauth" },
+            { label: "Google OAuth", slug: "examples/google-oauth" },
+            {
+              label: "Email and password with 2FA",
+              slug: "examples/email-password-2fa",
+            },
+            {
+              label: "Email and password with 2FA and WebAuthn",
+              slug: "examples/email-password-2fa-webauthn",
+            },
+          ],
+        },
       ],
     }),
   ],
