@@ -5,13 +5,26 @@ banner:
     Site under construction
 ---
 
+import {LinkCard, CardGrid} from "@astrojs/starlight/components";
+
 _This page builds upon the API defined in the [Basic session API](/lucia-next-docs-starlight/sessions/basic-api) page._
 
 Framework and library specific guides are also available:
 
-- [Astro](/lucia-next-docs-starlight/sessions/cookies/astro)
-- [Next.js](/lucia-next-docs-starlight/sessions/cookies/nextjs)
-- [SvelteKit](/lucia-next-docs-starlight/sessions/cookies/sveltekit)
+<CardGrid>
+  <LinkCard
+    title="Astro"
+    href="/lucia-next-docs-starlight/sessions/cookies/astro"
+  />
+  <LinkCard
+    title="Next.js"
+    href="/lucia-next-docs-starlight/sessions/cookies/nextjs"
+  />
+  <LinkCard
+    title="SvelteKit"
+    href="/lucia-next-docs-starlight/sessions/cookies/sveltekit"
+  />
+</CardGrid>
 
 ## CSRF protection
 
