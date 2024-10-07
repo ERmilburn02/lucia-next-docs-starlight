@@ -152,9 +152,9 @@ export async function GET(request: Request): Promise<Response> {
 	const existingUser = await getUserFromGitHubId(githubUserId);
 
 	if (existingUser !== null) {
-		const token = generateSessionToken();
-		const session = await createSession(token, existingUser.id);
-		setSessionTokenCookie(token, session.expiresAt);
+		const sessionToken = generateSessionToken();
+		const session = await createSession(sessionToken, existingUser.id);
+		setSessionTokenCookie(sessionToken, session.expiresAt);
 		return new Response(null, {
 			status: 302,
 			headers: {
@@ -166,9 +166,9 @@ export async function GET(request: Request): Promise<Response> {
 	// TODO: Replace this with your own DB query.
 	const user = await createUser(githubUserId, githubUsername);
 
-	const token = generateSessionToken();
-	const session = await createSession(token, user.id);
-	setSessionTokenCookie(token, session.expiresAt);
+	const sessionToken = generateSessionToken();
+	const session = await createSession(sessionToken, user.id);
+	setSessionTokenCookie(sessionToken, session.expiresAt);
 	return new Response(null, {
 		status: 302,
 		headers: {
@@ -180,9 +180,9 @@ export async function GET(request: Request): Promise<Response> {
 
 ## Validate requests
 
-Use the `getCurrentUser()` function from the [Session cookies in Astro](/lucia-next-docs-starlight/sessions/cookies/astro) page to get the current user and session.
+Use the `getCurrentUser()` function from the [Session cookies in Next.js](/lucia-next-docs-starlight/sessions/cookies/nextjs) page to get the current user and session.
 
-<Aside title="Note from author">I have no clue what pilcrow was referring to here, as he both linked to Astro instead of NextJS, and the function itself doesn't exist anywhere in the docs except the tutorials.</Aside>
+<Aside title="Note from author">I have no clue what pilcrow was referring to here, as  and the function itself doesn't exist anywhere in the docs except the tutorials.</Aside>
 
 ```tsx
 import { redirect } from "next/navigation";
