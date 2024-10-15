@@ -4,7 +4,7 @@
 
 This is a rebuilt of the Lucia Next Docs site using [Astro](https://astro.build) and [Starlight](https://starlight.astro.build).
 
-Based on [`lucia-auth/next@242e0b2`](https://github.com/lucia-auth/next/commit/242e0b2b702f21dda23d92cc69dcf97b3dbee11f)
+Based on [`lucia-auth/next@4ccc2a6`](https://github.com/lucia-auth/next/commit/4ccc2a68a89ad2e1205a3b49053f283b746ad21e)
 
 ## License
 

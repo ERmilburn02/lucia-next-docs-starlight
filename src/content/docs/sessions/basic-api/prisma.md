@@ -93,7 +93,7 @@ The session ID will be SHA-256 hash of the token. We'll set the expiration to 30
 
 ```ts
 import { prisma } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -123,7 +123,7 @@ For convenience, we'll return both the session and user object tied to the sessi
 
 ```ts
 import { prisma } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -145,7 +145,7 @@ export async function validateSessionToken(
   }
   const { user, ...session } = result;
   if (Date.now() >= session.expiresAt.getTime()) {
-    await prisma.session.delete(sessionId);
+    await prisma.session.delete({ where: { id: sessionid } });
     return { session: null, user: null };
   }
   if (Date.now() >= session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * 15) {
@@ -179,7 +179,7 @@ Here's the full code:
 
 ```ts
 import { prisma } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 import type { User, Session } from "@prisma/client";
@@ -221,7 +221,7 @@ export async function validateSessionToken(
   }
   const { user, ...session } = result;
   if (Date.now() >= session.expiresAt.getTime()) {
-    await prisma.session.delete(sessionId);
+    await prisma.session.delete({ where: { id: sessionid } });
     return { session: null, user: null };
   }
   if (Date.now() >= session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * 15) {
@@ -239,7 +239,7 @@ export async function validateSessionToken(
 }
 
 export async function invalidateSession(sessionId: string): void {
-  await db.session.delete(sessionId);
+  await prisma.session.delete({ where: { id: sessionid } });
 }
 
 export type SessionValidationResult =
@@ -256,7 +256,7 @@ import { generateSessionToken, createSession } from "./session.js";
 
 const token = generateSessionToken();
 const session = createSession(token, userId);
-setSessionTokenCookie(session);
+setSessionTokenCookie(token);
 ```
 
 Validate a user-provided token with `validateSessionToken()`.

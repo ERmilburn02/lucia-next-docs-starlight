@@ -96,7 +96,7 @@ The session ID will be SHA-256 hash of the token. We'll set the expiration to 30
 
 ```ts
 import { db } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -112,7 +112,7 @@ export function createSession(token: string, userId: number): Session {
     "INSERT INTO session (id, user_id, expires_at) VALUES (?, ?, ?)",
     session.id,
     session.userId,
-    Math.floor(session.expiresAt / 1000)
+    Math.floor(session.expiresAt.getTime() / 1000)
   );
   return session;
 }
@@ -129,7 +129,7 @@ For convenience, we'll return both the session and user object tied to the sessi
 
 ```ts
 import { db } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -159,7 +159,7 @@ export function validateSessionToken(token: string): SessionValidationResult {
     session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
     db.execute(
       "UPDATE session SET expires_at = ? WHERE id = ?",
-      Math.floor(session.expiresAt / 1000),
+      Math.floor(session.expiresAt.getTime() / 1000),
       session.id
     );
   }
@@ -183,7 +183,7 @@ Here's the full code:
 
 ```ts
 import { db } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 export function generateSessionToken(): string {
@@ -204,7 +204,7 @@ export function createSession(token: string, userId: number): Session {
     "INSERT INTO session (id, user_id, expires_at) VALUES (?, ?, ?)",
     session.id,
     session.userId,
-    Math.floor(session.expiresAt / 1000)
+    Math.floor(session.expiresAt.getTime() / 1000)
   );
   return session;
 }
@@ -234,7 +234,7 @@ export function validateSessionToken(token: string): SessionValidationResult {
     session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
     db.execute(
       "UPDATE session SET expires_at = ? WHERE id = ?",
-      Math.floor(session.expiresAt / 1000),
+      Math.floor(session.expiresAt.getTime() / 1000),
       session.id
     );
   }
@@ -269,7 +269,7 @@ import { generateSessionToken, createSession } from "./session.js";
 
 const token = generateSessionToken();
 const session = createSession(token, userId);
-setSessionTokenCookie(session);
+setSessionTokenCookie(token);
 ```
 
 Validate a user-provided token with `validateSessionToken()`.

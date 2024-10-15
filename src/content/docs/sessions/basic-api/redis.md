@@ -68,7 +68,7 @@ The session ID will be SHA-256 hash of the token. We'll set the expiration to 30
 
 ```ts
 import { redis } from "./redis.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -102,11 +102,9 @@ Sessions are validated in 2 steps:
 
 We'll also extend the session expiration when it's close to expiration. This ensures active sessions are persisted, while inactive ones will eventually expire. We'll handle this by checking if there's less than 15 days (half of the 30 day expiration) before expiration.
 
-For convenience, we'll return both the session and user object tied to the session ID.
-
 ```ts
 import { redis } from "./redis.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -160,7 +158,7 @@ Here's the full code:
 
 ```ts
 import { redis } from "./redis.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 export function generateSessionToken(): string {
@@ -243,7 +241,7 @@ import { generateSessionToken, createSession } from "./session.js";
 
 const token = generateSessionToken();
 const session = createSession(token, userId);
-setSessionTokenCookie(session);
+setSessionTokenCookie(token);
 ```
 
 Validate a user-provided token with `validateSessionToken()`.
@@ -253,7 +251,7 @@ import { validateSessionToken } from "./session.js";
 
 const token = cookies.get("session");
 if (token !== null) {
-  const { session, user } = validateSessionToken(token);
+  const session = validateSessionToken(token);
 }
 ```
 

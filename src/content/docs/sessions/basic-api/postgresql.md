@@ -101,7 +101,7 @@ The session ID will be SHA-256 hash of the token. We'll set the expiration to 30
 
 ```ts
 import { db } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -134,7 +134,7 @@ For convenience, we'll return both the session and user object tied to the sessi
 
 ```ts
 import { db } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -190,7 +190,7 @@ Here's the full code:
 
 ```ts
 import { db } from "./db.js";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 export function generateSessionToken(): string {
@@ -281,7 +281,7 @@ import { generateSessionToken, createSession } from "./session.js";
 
 const token = generateSessionToken();
 const session = createSession(token, userId);
-setSessionTokenCookie(session);
+setSessionTokenCookie(token);
 ```
 
 Validate a user-provided token with `validateSessionToken()`.

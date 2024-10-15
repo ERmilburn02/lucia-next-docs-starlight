@@ -164,7 +164,7 @@ The session ID will be SHA-256 hash of the token. We'll set the expiration to 30
 ```ts
 import { db, userTable, sessionTable } from "./db.js";
 import { eq } from "drizzle-orm";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -193,7 +193,7 @@ For convenience, we'll return both the session and user object tied to the sessi
 ```ts
 import { db, userTable, sessionTable } from "./db.js";
 import { eq } from "drizzle-orm";
-import { encodeBase32, encodeHexLowerCase } from "@oslojs/encoding";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import { sha256 } from "@oslojs/crypto/sha2";
 
 // ...
@@ -237,7 +237,7 @@ import { db, userTable, sessionTable } from "./db.js";
 // ...
 
 export async function invalidateSession(sessionId: string): void {
-  await db.delete(sessionTable).where(eq(sessionTable.id, session.id));
+  await db.delete(sessionTable).where(eq(sessionTable.id, sessionId));
 }
 ```
 
@@ -302,7 +302,7 @@ export async function validateSessionToken(
 }
 
 export async function invalidateSession(sessionId: string): void {
-  await db.delete(sessionTable).where(eq(sessionTable.id, session.id));
+  await db.delete(sessionTable).where(eq(sessionTable.id, sessionId));
 }
 
 export type SessionValidationResult =
@@ -319,7 +319,7 @@ import { generateSessionToken, createSession } from "./session.js";
 
 const token = generateSessionToken();
 const session = createSession(token, userId);
-setSessionTokenCookie(session);
+setSessionTokenCookie(token);
 ```
 
 Validate a user-provided token with `validateSessionToken()`.
