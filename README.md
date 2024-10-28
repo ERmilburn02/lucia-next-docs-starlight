@@ -1,3 +1,7 @@
+# REPO ARCHIVED
+
+This was only meant to be a proof of concept, and I don't want to keep updating it every time lucia's docs change.
+
 # Lucia Next Docs - Starlight rebuild
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
